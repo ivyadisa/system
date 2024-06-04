@@ -1,0 +1,43 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-2 pt-5">
+        <div class="col-md-4">
+            <div class="card my-3 shadow">
+                <div class="card-body">
+                    <h3>Form</h3>
+                    <form method="POST">
+                        {{ form }}
+                        {% csrf_token %}
+                        {{ form.as_p }} 
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            {% for post in posts %}
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ post.image_url }}" alt="image" class="img-fluid" />
+                        </div>
+                        <div class="col-md-8">
+                            <small>{{ post.date_created }}</small>
+                            <hr>
+                            <a class="h3" href="">{{ post.title }}</a>
+                            <p class="text-justify my-3">
+                                {{ post.content }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
